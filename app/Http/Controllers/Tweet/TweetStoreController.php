@@ -13,13 +13,23 @@ class TweetStoreController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(): RedirectResponse
+    public function __invoke(Request $request): RedirectResponse
     {
+        $this->validate($request, [
+            'content' => 'required'
+        ]
+        );
+        
         Tweet::create([
             'user_id' => Auth::id(),
             'content' => request('content'),
         ]);
 
-        return redirect()->route('register');
+        $notification = array(
+            'message' => 'Successfully Done',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('register')->with($notification);
     }
 }

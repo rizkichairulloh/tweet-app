@@ -13,6 +13,12 @@
                         @csrf
                         <textarea name="content" class="textarea textarea-bordered bg-white w-full" placeholder="Apa yang kamu pikirkan?"
                             rows="4"></textarea>
+                        <!-- error message untuk title -->
+                        @error('content')
+                            <div class="text-error mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
                         <input type="submit" value="Tweet" class="btn btn-primary text-white my-2">
                     </form>
                 </div>
